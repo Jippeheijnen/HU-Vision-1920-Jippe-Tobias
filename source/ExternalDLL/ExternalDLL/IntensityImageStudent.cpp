@@ -1,4 +1,5 @@
 #include "IntensityImageStudent.h"
+#include <map>
 
 IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
@@ -7,16 +8,19 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	int throwError = 0, e = 1 / throwError;
+	std::map<int, int> *buffer = new std::map<int, int>;
 	//TODO: Create a copy from the other object
 }
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
 	int throwError = 0, e = 1 / throwError;
+	std::map<int, int> *buffer = new std::map<int, int>;
 	//TODO: Initialize pixel storage
 }
 
 IntensityImageStudent::~IntensityImageStudent() {
 	int throwError = 0, e = 1 / throwError;
+	delete buffer; 
 	//TODO: delete allocated objects
 }
 
