@@ -7,9 +7,7 @@ RGBImageStudent::RGBImageStudent() : RGBImage() {
 }
 
 RGBImageStudent::RGBImageStudent(const RGBImageStudent& other) : RGBImage(other.getWidth(), other.getHeight()) {
-	int throwError = 0, e = 1 / throwError;
 	buffer = new std::map<pair<int, int>, RGB>;
-	size = other.size;
 	*buffer = *other.buffer;
 	//TODO: Create a copy from the other object
 }
@@ -17,7 +15,6 @@ RGBImageStudent::RGBImageStudent(const RGBImageStudent& other) : RGBImage(other.
 
 RGBImageStudent::RGBImageStudent(const int width, const int height) : RGBImage(width, height) {
 	buffer = new map<pair<int, int>, RGB>;
-	size = { width, height };
 	//TODO: Initialize pixel storage
 }
 
@@ -35,7 +32,6 @@ void RGBImageStudent::set(const int width, const int height) {
 
 void RGBImageStudent::set(const RGBImageStudent& other) {
 	RGBImage::set(other.getWidth(), other.getHeight());
-	size = other.size;
 	delete buffer;
 	buffer = new map<pair<int, int>, RGB>;
 	*buffer = *other.buffer;
@@ -49,8 +45,12 @@ void RGBImageStudent::setPixel(int x, int y, RGB pixel) {
 }
 
 void RGBImageStudent::setPixel(int i, RGB pixel) {
-	int x = i % size.first;  // size.first is the width.
-	int y = (i - x) / size.first;
+	int x = 0;
+	int y = 0;
+	if (i != 0) {
+		x = i % getWidth();  // size.first is the width.
+		y = (i - x) / getWidth();
+	}
 	pair<int, int> temp = { x, y };
 	buffer->insert(make_pair(temp, pixel));
 	/*
@@ -83,8 +83,12 @@ RGB RGBImageStudent::getPixel(int x, int y) const {
 }
 
 RGB RGBImageStudent::getPixel(int i) const {
-	int x = i % size.first;  // size.first is the width.
-	int y = (i - x) / size.first;
+	int x = 0;
+	int y = 0;
+	if (i != 0) {
+		x = i % getWidth();  // size.first is the width.
+		y = (i - x) / getWidth();
+	}
 	pair<int, int> temp = { x, y };
 	//TODO: see setPixel(int i, RGB pixel)
 	return buffer->at(temp);

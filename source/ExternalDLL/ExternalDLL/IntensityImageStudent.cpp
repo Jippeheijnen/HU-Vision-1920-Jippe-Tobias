@@ -7,7 +7,6 @@ IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
 
 IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent& other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	buffer = new std::map<std::pair<int, int>, Intensity>;
-	size = other.size;
 	*buffer = *other.buffer;
 
 	//TODO: Create a copy from the other object
@@ -15,7 +14,6 @@ IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent& other)
 
 IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
 	buffer = new std::map<std::pair<int, int>, Intensity>;
-	size = { width, height };
 	//TODO: Initialize pixel storage
 }
 
@@ -26,7 +24,6 @@ IntensityImageStudent::~IntensityImageStudent() {
 
 void IntensityImageStudent::set(const int width, const int height) {
 	IntensityImage::set(width, height);
-	size = { width, height };
 	delete buffer;
 	buffer = new std::map<std::pair<int, int>, Intensity>;
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
@@ -34,7 +31,6 @@ void IntensityImageStudent::set(const int width, const int height) {
 
 void IntensityImageStudent::set(const IntensityImageStudent& other) {
 	IntensityImage::set(other.getWidth(), other.getHeight());
-	size = other.size;
 	delete buffer;
 	buffer = new std::map<std::pair<int, int>, Intensity>;
 	*buffer = *other.buffer;
@@ -48,8 +44,12 @@ void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
 }
 
 void IntensityImageStudent::setPixel(int i, Intensity pixel) {
-	int x = i % size.first;
-	int y = (i - x) / size.first;
+	int x = 0;
+	int y = 0;
+	if (i != 0) {
+		x = i % getWidth();
+		y = (i - x) / getWidth();
+	}
 	std::pair<int, int> temp = { x, y };
 	buffer->insert(std::make_pair(temp, pixel));
 	/*
@@ -82,8 +82,12 @@ Intensity IntensityImageStudent::getPixel(int x, int y) const {
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
-	int x = i % size.first;
-	int y = (i - x) / size.first;
+	int x = 0; 
+	int y = 0;
+	if (i != 0) {
+		x = i % getWidth();
+		y = (i - x) / getWidth();
+	}
 	Intensity pixel = buffer->at({ x, y });
 	//TODO: see setPixel(int i, RGB pixel)
 	return pixel;

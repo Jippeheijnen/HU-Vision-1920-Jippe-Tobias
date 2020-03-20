@@ -9,11 +9,21 @@
 #include "GrayscaleAlgorithm.h"
 #include "ImageFactory.h"
 #include "HereBeDragons.h"
+#include "RGBImage.h"
+#include "IntensityImage.h"
+
+void RGBtoIntensity(const RGBImage &src, IntensityImage &dst){
+	//Intensity = (0.21R + 0.72G + 0.07B)
+	for (int i = 0; i < (src.getHeight() * src.getWidth()); i++) {
+		RGB pixel = src.getPixel(i);
+		Intensity newPixel = ((pixel.r * 0.21) + (pixel.g * 0.72) + (pixel.b * 0.07));
+		dst.setPixel(i, newPixel);
+	}
+}
 
 IntensityImage * DefaultPreProcessing::stepToIntensityImage(const RGBImage &src) const {
-	GrayscaleAlgorithm grayScaleAlgorithm;
 	IntensityImage * image = ImageFactory::newIntensityImage();
-	grayScaleAlgorithm.doAlgorithm(src, *image);
+	RGBtoIntensity(src, *image);
 	return image;
 }
 
