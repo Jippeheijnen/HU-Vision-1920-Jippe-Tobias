@@ -6,7 +6,12 @@
 
 #pragma once
 #include "IntensityImage.h"
+#include <map>
 class IntensityImageStudent : public IntensityImage {
+private:
+	std::map<std::pair<int, int>, Intensity>* buffer;
+	std::pair<int, int> size;
+
 public:
 	IntensityImageStudent();
 	IntensityImageStudent(const IntensityImageStudent &other);
