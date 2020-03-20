@@ -6,7 +6,13 @@
 
 #pragma once
 #include "RGBImage.h"
+#include <map>
+using namespace std;
+
 class RGBImageStudent : public RGBImage {
+private:
+	map<pair<int, int>, RGB>* buffer;
+	pair<int, int> size;
 public:
 
 	RGBImageStudent();
