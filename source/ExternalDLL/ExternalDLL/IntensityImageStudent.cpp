@@ -2,15 +2,14 @@
 #include <map>
 
 IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
-	int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
 	//TODO: Nothing
 }
 
-IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
+IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent& other) : IntensityImage(other.getWidth(), other.getHeight()) {
 	buffer = new std::map<std::pair<int, int>, Intensity>;
 	size = other.size;
 	*buffer = *other.buffer;
-	
+
 	//TODO: Create a copy from the other object
 }
 
@@ -21,7 +20,7 @@ IntensityImageStudent::IntensityImageStudent(const int width, const int height) 
 }
 
 IntensityImageStudent::~IntensityImageStudent() {
-	delete buffer; 
+	delete buffer;
 	//TODO: delete allocated objects
 }
 
@@ -33,7 +32,7 @@ void IntensityImageStudent::set(const int width, const int height) {
 	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
 }
 
-void IntensityImageStudent::set(const IntensityImageStudent &other) {
+void IntensityImageStudent::set(const IntensityImageStudent& other) {
 	IntensityImage::set(other.getWidth(), other.getHeight());
 	size = other.size;
 	delete buffer;
@@ -77,14 +76,15 @@ void IntensityImageStudent::setPixel(int i, Intensity pixel) {
 }
 
 Intensity IntensityImageStudent::getPixel(int x, int y) const {
-	std::pair<int, int> temp = { x, y };
-	buffer
+	Intensity pixel = buffer->at({ x, y });
 	//TODO: no comment needed :)
-	return 0;
+	return pixel;
 }
 
 Intensity IntensityImageStudent::getPixel(int i) const {
-	int throwError = 0, e = 1 / throwError;
+	int x = i % size.first;
+	int y = (i - x) / size.first;
+	Intensity pixel = buffer->at({ x, y });
 	//TODO: see setPixel(int i, RGB pixel)
-	return 0;
+	return pixel;
 }
