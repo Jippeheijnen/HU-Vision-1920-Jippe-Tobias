@@ -14,6 +14,7 @@
 
 void RGBtoIntensity(const RGBImage &src, IntensityImage &dst){
 	//Intensity = (0.21R + 0.72G + 0.07B)
+	dst.set(src.getWidth(), src.getHeight());
 	for (int i = 0; i < (src.getHeight() * src.getWidth()); i++) {
 		RGB pixel = src.getPixel(i);
 		Intensity newPixel = ((pixel.r * 0.21) + (pixel.g * 0.72) + (pixel.b * 0.07));
