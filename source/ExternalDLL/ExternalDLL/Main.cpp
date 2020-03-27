@@ -17,6 +17,7 @@ int main(int argc, char * argv[]) {
 
 	ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
+	//Our implementation is applied in DefaultPreprocessing.cpp
 
 
 	ImageIO::debugFolder = "C:\\Users\\malla\\Debug";
