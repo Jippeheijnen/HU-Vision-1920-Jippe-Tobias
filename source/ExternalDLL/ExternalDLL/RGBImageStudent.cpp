@@ -3,93 +3,64 @@
 using namespace std;
 
 RGBImageStudent::RGBImageStudent() : RGBImage() {
-	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
+													//Empty constructor 						
 }
 
 RGBImageStudent::RGBImageStudent(const RGBImageStudent& other) : RGBImage(other.getWidth(), other.getHeight()) {
-	buffer = new std::map<pair<int, int>, RGB>;
-	*buffer = *other.buffer;
-	//TODO: Create a copy from the other object
+	buffer = new std::map<pair<int, int>, RGB>;		//place buffer on the heap
+	*buffer = *other.buffer;						//copy buffer from other object
 }
 
 
 RGBImageStudent::RGBImageStudent(const int width, const int height) : RGBImage(width, height) {
-	buffer = new map<pair<int, int>, RGB>;
-	//TODO: Initialize pixel storage
+	buffer = new map<pair<int, int>, RGB>;			//place buffer on the heap	
 }
 
 RGBImageStudent::~RGBImageStudent() {
-	delete buffer;
-	//TODO: delete allocated objects
+	delete buffer;									//delete buffer from the heap
 }
 
 void RGBImageStudent::set(const int width, const int height) {
-	RGBImage::set(width, height);
-	delete buffer;
-	buffer = new map<pair<int, int>, RGB>;
-	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
+	RGBImage::set(width, height);					//call set function from parent class
+	delete buffer;									//delete buffer from the heap
+	buffer = new map<pair<int, int>, RGB>;			//place new buffer on the heap 
 }
 
 void RGBImageStudent::set(const RGBImageStudent& other) {
-	RGBImage::set(other.getWidth(), other.getHeight());
-	delete buffer;
-	buffer = new map<pair<int, int>, RGB>;
-	*buffer = *other.buffer;
-	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
+	RGBImage::set(other.getWidth(), other.getHeight());	//call set function from parent class
+	delete buffer;										//delete buffer from the heap
+	buffer = new map<pair<int, int>, RGB>;				//place new buffer on the heap
+	*buffer = *other.buffer;							//copy buffer from other object
 }
 
 void RGBImageStudent::setPixel(int x, int y, RGB pixel) {
-	pair<int, int> temp = { x, y };
-	buffer->insert(make_pair(temp, pixel));
-	//TODO: no comment needed :)
+	pair<int, int> temp = { x, y };					//create pair and fill with x and y axis
+	buffer->insert(make_pair(temp, pixel));			//store pair as key and intensity value in the buffer
 }
 
 void RGBImageStudent::setPixel(int i, RGB pixel) {
-	int x = 0;
-	int y = 0;
-	if (i != 0) {
-		x = i % getWidth();  // size.first is the width.
-		y = (i - x) / getWidth();
+	int x = 0;										//declare x variable
+	int y = 0;										//declare y variable
+	if (i != 0) {									//if given value is not (x = 0, y = 0)
+		x = i % getWidth();							//get x axis
+		y = (i - x) / getWidth();					//get y axis
 	}
-	pair<int, int> temp = { x, y };
-	buffer->insert(make_pair(temp, pixel));
-	/*
-	* TODO: set pixel i in "Row-Major Order"
-	*
-	*
-	* Original 2d image (values):
-	* 9 1 2
-	* 4 3 5
-	* 8 7 8
-	*
-	* 1d representation (i, value):
-	* i		value
-	* 0		9
-	* 1		1
-	* 2		2
-	* 3		4
-	* 4		3
-	* 5		5
-	* 6		8
-	* 7		7
-	* 8		8
-	*/
+	pair<int, int> temp = { x, y };					//create pair and fill with x and y axis 
+	buffer->insert(make_pair(temp, pixel));			//store pair as key and intensity value in the buffer
 }
 
 RGB RGBImageStudent::getPixel(int x, int y) const {
-	pair<int, int> temp = { x,y };
-	//TODO: no comment needed :)
-	return buffer->at(temp);
+	pair<int, int> temp = { x,y };					//create pair and fill with x and y axis
+	return buffer->at(temp);						//get and return intensity value with pair key
 }
 
 RGB RGBImageStudent::getPixel(int i) const {
-	int x = 0;
-	int y = 0;
-	if (i != 0) {
-		x = i % getWidth();  // size.first is the width.
-		y = (i - x) / getWidth();
+	int x = 0;										//declare x variable
+	int y = 0;										//declare y variable
+	if (i != 0) {									//if given value is not (x = 0, y = 0)
+		x = i % getWidth();							//get x axis
+		y = (i - x) / getWidth();					//get y axis 
 	}
-	pair<int, int> temp = { x, y };
-	//TODO: see setPixel(int i, RGB pixel)
-	return buffer->at(temp);
+	pair<int, int> temp = { x, y };					//create pair and fill with x and y axis
+	return buffer->at(temp);						//get and return intensity value with pair key
 }

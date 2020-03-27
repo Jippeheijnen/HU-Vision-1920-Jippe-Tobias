@@ -14,18 +14,18 @@
 
 void RGBtoIntensity(const RGBImage &src, IntensityImage &dst){
 	//Intensity = (0.21R + 0.72G + 0.07B)
-	dst.set(src.getWidth(), src.getHeight());
-	for (int i = 0; i < (src.getHeight() * src.getWidth()); i++) {
-		RGB pixel = src.getPixel(i);
-		Intensity newPixel = ((pixel.r * 0.21) + (pixel.g * 0.72) + (pixel.b * 0.07));
-		dst.setPixel(i, newPixel);
+	dst.set(src.getWidth(), src.getHeight());											//Create new buffer and set lenght and width				
+	for (int i = 0; i < (src.getHeight() * src.getWidth()); i++) {						//For each pixel in RGBImage
+		RGB pixel = src.getPixel(i);													//Get RGB value from pixel 
+		Intensity newPixel = ((pixel.r * 0.21) + (pixel.g * 0.72) + (pixel.b * 0.07));	//Convert RGB value to Intensity value with formula
+		dst.setPixel(i, newPixel);														//Store intensityvalue in IntensityImage object 
 	}
 }
 
 IntensityImage * DefaultPreProcessing::stepToIntensityImage(const RGBImage &src) const {
-	IntensityImage * image = ImageFactory::newIntensityImage();
-	RGBtoIntensity(src, *image);
-	return image;
+	IntensityImage * image = ImageFactory::newIntensityImage();			//Declare empty IntensityImage object 
+	RGBtoIntensity(src, *image);										//Excecute algoritm
+	return image;														//return IntensityImage object 
 }
 
 IntensityImage * DefaultPreProcessing::stepScaleImage(const IntensityImage &src) const {
